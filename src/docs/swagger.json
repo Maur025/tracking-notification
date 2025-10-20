@@ -1,0 +1,57 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "tracking-notification",
+		"version": "0.0.1",
+		"description": "Tracking notification server with Express and TypeScript",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "maur025"
+		}
+	},
+	"paths": {
+		"/emails/queue": {
+			"post": {
+				"operationId": "AddQueueEmail",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api"
+		}
+	]
+}
