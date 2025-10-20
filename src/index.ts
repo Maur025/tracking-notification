@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-import './worker';
 import { loggerDebug } from '@maur025/core-logger';
 // import { Queue } from 'bullmq';
-import appServer from './server';
+import appServer from './app-server';
 import { RegisterRoutes } from './routes/routes';
+import { initializeWorkers } from '@worker/initialize-workers';
 
 const { startServer, getApplication } = appServer;
 
@@ -13,6 +13,8 @@ loggerDebug('TRACKING NOTIFICATION SERVER running...');
 RegisterRoutes(getApplication());
 
 startServer();
+
+initializeWorkers();
 
 // const myQueue = new Queue('foo');
 
