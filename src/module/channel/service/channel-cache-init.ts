@@ -2,16 +2,16 @@ import z, { array, object } from 'zod';
 import { ChannelResponse } from '../dto/response/channel-response';
 import { loggerError } from '@maur025/core-logger';
 import { container } from 'tsyringe';
-import ChannelCache from '@channel/cache/channel-cache';
-import { Channel } from '@channel/schema/channel';
-import { CProtocolResponse } from '@channel/dto/response/c-protocol-response';
-import { CProtocol } from '@channel/schema/c-protocol';
-import { CProtocolName } from '@channel/schema/c-protocol-name';
-import { ChannelData } from '@channel/schema/channel-data';
-import { ChannelDataParams } from '@channel/schema/channel-data-params';
-import { ChannelDataUserParams } from '@channel/schema/channel-data-user-params';
 import { fixCommasInJsonString } from '@util/fix-commas-in-json-string';
 import { getObjectOfString } from '@util/get-object-of-string';
+import ChannelCache from '../cache/channel-cache';
+import { Channel } from '../schema/channel';
+import { CProtocol } from '../schema/c-protocol';
+import { CProtocolResponse } from '../dto/response/c-protocol-response';
+import { CProtocolName } from '../schema/c-protocol-name';
+import { ChannelData } from '../schema/channel-data';
+import { ChannelDataParams } from '../schema/channel-data-params';
+import { ChannelDataUserParams } from '../schema/channel-data-user-params';
 
 const ChannelCacheInitRequest = object({
 	channelResponseList: array(ChannelResponse).default([]),

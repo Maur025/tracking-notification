@@ -2,15 +2,23 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import './worker';
 import { loggerDebug } from '@maur025/core-logger';
-import { Queue } from 'bullmq';
+// import { Queue } from 'bullmq';
+import appServer from './server';
+import { RegisterRoutes } from './routes/routes';
 
-loggerDebug('WELCOME TO TRACKING NOTIFICATION SERVER');
+const { startServer, getApplication } = appServer;
 
-const myQueue = new Queue('foo');
+loggerDebug('TRACKING NOTIFICATION SERVER running...');
 
-const addJobs = async () => {
-	await myQueue.add('myJobName', { foo: 'bar' });
-	await myQueue.add('myJobName', { qux: 'baz' });
-};
+RegisterRoutes(getApplication());
 
-await addJobs();
+startServer();
+
+// const myQueue = new Queue('foo');
+
+// const addJobs = async () => {
+// 	await myQueue.add('myJobName', { foo: 'bar' });
+// 	await myQueue.add('myJobName', { qux: 'baz' });
+// };
+
+// await addJobs();
