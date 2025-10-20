@@ -11,6 +11,8 @@
 		"paths": {
 			"@config/*": ["src/config/*"],
 			"@utils/*": ["src/utils/*"],
+			"@channel/*": ["src/channel/*"],
+			"@util/*": ["src/util/*"],
 			"@src/*": ["src/*"],
 			"@integrationTest/*": ["test/integration/*"],
 			"@unitTest/*": ["test/unit/*"]

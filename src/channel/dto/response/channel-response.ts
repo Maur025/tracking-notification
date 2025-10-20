@@ -1,0 +1,15 @@
+import { BaseData } from '@maur025/core-model-data';
+import z, { preprocess, string } from 'zod';
+import { CProtocolResponse } from './c-protocol-response';
+
+export const ChannelResponse = BaseData.extend({
+	id: preprocess(value => {
+		return String(value);
+	}, string()),
+	name: string().nonempty(),
+	data: string().nonempty(),
+	cprotocol_id: string().nonempty(),
+	cprotocol: CProtocolResponse,
+});
+
+export type ChannelResponse = z.infer<typeof ChannelResponse>;
