@@ -26,7 +26,7 @@
 				"operationId": "AddQueueEmail",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Email added to queue",
 						"content": {
 							"application/json": {
 								"schema": {

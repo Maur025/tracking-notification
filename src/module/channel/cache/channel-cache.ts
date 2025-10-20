@@ -1,5 +1,5 @@
-import { Channel } from '@channel/schema/channel';
 import { singleton } from 'tsyringe';
+import { Channel } from '../schema/channel';
 
 @singleton()
 export default class ChannelCache {

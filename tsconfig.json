@@ -7,7 +7,6 @@
 		"module": "ES2022",
 		"rootDir": ".",
 		"paths": {
-			"@channel/*": ["src/channel/*"],
 			"@config/*": ["src/config/*"],
 			"@doc/*":["src/docs/*"],
 			"@module/*":["src/module/*"],

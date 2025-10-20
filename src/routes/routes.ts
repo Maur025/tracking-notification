@@ -4,7 +4,7 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { EmailController } from './../email/email.controller.js';
+import { EmailController } from './../module/email/email.controller.js';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -51,7 +51,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: undefined,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);
