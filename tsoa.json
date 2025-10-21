@@ -1,11 +1,12 @@
 {
   "entryFile": "src/index.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs":[ "src/**/*.ts"],
+  "controllerPathGlobs":[ "src/**/*controller.ts"],
   "spec": {
     "outputDirectory": "src/docs",
     "specVersion": 3,
-    "basePath": "/api/notifications"
+    "basePath": "/api/notifications",
+    "esm": true
   },
   "routes": {
     "basePath": "/api/notifications",

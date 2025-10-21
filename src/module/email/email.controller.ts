@@ -1,4 +1,5 @@
 import {
+	Body,
 	Controller,
 	Post,
 	Response,
@@ -13,6 +14,13 @@ interface EmailResponseModel {
 	message?: string;
 	data?: { id: string; queueName: string; timestamp: number };
 }
+
+export interface INotifyToEmailSchema {
+	senderList: string[];
+	subject: string;
+	htmlMessage: string;
+}
+
 @Route('emails')
 export class EmailController extends Controller {
 	@SuccessResponse(StatusCodes.OK, 'Success')
@@ -21,9 +29,11 @@ export class EmailController extends Controller {
 		message: 'Internal Server Error',
 	})
 	@Post('queue')
-	public async addQueueEmail(): Promise<EmailResponseModel> {
+	public async addQueueEmail(
+		@Body() requestBody: INotifyToEmailSchema,
+	): Promise<EmailResponseModel> {
 		try {
-			const processResult = await addEmailNotificationToQueue();
+			const processResult = await addEmailNotificationToQueue(requestBody);
 
 			this.setStatus(StatusCodes.OK);
 			return {
