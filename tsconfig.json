@@ -26,7 +26,7 @@
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"outDir": "dist",
-		// for tsoa
+		
 		"incremental": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
