@@ -1,4 +1,4 @@
-import { EnvironmentSchema } from './environment.schema';
+import { EnvironmentSchema } from './environment.schema.js';
 
 const {
 	TRACKING_DB_URL = 'http://172.20.50.123:9988',

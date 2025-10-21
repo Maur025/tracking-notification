@@ -1,7 +1,7 @@
 import { BaseData } from '@maur025/core-model-data';
 import z, { string } from 'zod';
-import { CProtocol } from './c-protocol';
-import { ChannelData } from './channel-data';
+import { CProtocol } from './c-protocol.js';
+import { ChannelData } from './channel-data.js';
 
 export const Channel = BaseData.extend({
 	name: string().nonempty(),

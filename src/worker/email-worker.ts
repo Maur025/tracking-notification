@@ -1,10 +1,10 @@
 import { loggerDebug, loggerError } from '@maur025/core-logger';
 import { Worker } from 'bullmq';
-import IORedis from 'ioredis';
+import { Redis } from 'ioredis';
 
 let emailWorker: Worker;
 
-export const runEmailWorker = (connection: IORedis): Worker => {
+export const runEmailWorker = (connection: Redis): Worker => {
 	emailWorker = new Worker(
 		'emailQueue',
 		async job => {

@@ -7,9 +7,9 @@
 		"node": ">=20"
 	},
 	"scripts": {
-		"dev": "tsx watch src/index.ts",
-		"build": "tsc -p tsconfig-build.json && tsc-alias",
-		"start": "node dist/index.js",
+		"dev": "tsx watch -r tsconfig-paths/register src/index.ts",
+		"build": "swc src -d dist --source-maps --copy-files && tsc --noEmit && tsc-alias -p tsconfig.json --outDir dist",
+		"start": "node dist/src/index.js",
 		"lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
 		"test": "vitest --config vitest.unit.config.ts",
 		"test:integration": "vitest --config vitest.integration.config.ts",
@@ -32,6 +32,8 @@
 		"@eslint/json": "^0.13.1",
 		"@eslint/markdown": "^7.2.0",
 		"@scalar/express-api-reference": "^0.8.22",
+		"@swc/cli": "^0.7.8",
+		"@swc/core": "^1.13.5",
 		"@types/compression": "^1.8.1",
 		"@types/cors": "^2.8.19",
 		"@types/express": "^5.0.3",

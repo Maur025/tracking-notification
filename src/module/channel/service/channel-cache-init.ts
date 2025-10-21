@@ -1,17 +1,17 @@
 import z, { array, object } from 'zod';
-import { ChannelResponse } from '../dto/response/channel-response';
+import { ChannelResponse } from '../dto/response/channel-response.js';
 import { loggerError } from '@maur025/core-logger';
 import { container } from 'tsyringe';
-import { fixCommasInJsonString } from '@util/fix-commas-in-json-string';
-import { getObjectOfString } from '@util/get-object-of-string';
-import ChannelCache from '../cache/channel-cache';
-import { Channel } from '../schema/channel';
-import { CProtocol } from '../schema/c-protocol';
-import { CProtocolResponse } from '../dto/response/c-protocol-response';
-import { CProtocolName } from '../schema/c-protocol-name';
-import { ChannelData } from '../schema/channel-data';
-import { ChannelDataParams } from '../schema/channel-data-params';
-import { ChannelDataUserParams } from '../schema/channel-data-user-params';
+import { fixCommasInJsonString } from '@util/fix-commas-in-json-string.js';
+import { getObjectOfString } from '@util/get-object-of-string.js';
+import ChannelCache from '../cache/channel-cache.js';
+import { Channel } from '../schema/channel.js';
+import { CProtocol } from '../schema/c-protocol.js';
+import { CProtocolResponse } from '../dto/response/c-protocol-response.js';
+import { CProtocolName } from '../schema/c-protocol-name.js';
+import { ChannelData } from '../schema/channel-data.js';
+import { ChannelDataParams } from '../schema/channel-data-params.js';
+import { ChannelDataUserParams } from '../schema/channel-data-user-params.js';
 
 const ChannelCacheInitRequest = object({
 	channelResponseList: array(ChannelResponse).default([]),
