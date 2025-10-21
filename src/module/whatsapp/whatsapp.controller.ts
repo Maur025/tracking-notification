@@ -1,5 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import {
+	Body,
 	Controller,
 	Post,
 	Response,
@@ -14,6 +15,10 @@ interface WhatsappResponseModel {
 	data?: { id: string; queueName: string; timestamp: number };
 }
 
+interface INotifyToWhatsappSchema {
+	numberPhone: string;
+	message: string;
+}
 @Route('whatsapps')
 export class WhatsappController extends Controller {
 	@SuccessResponse(StatusCodes.OK, 'Success')
@@ -22,9 +27,11 @@ export class WhatsappController extends Controller {
 		message: 'Internal Server Error',
 	})
 	@Post('queue')
-	public async addWhatsappToQueue(): Promise<WhatsappResponseModel> {
+	public async addWhatsappToQueue(
+		@Body() requestBody: INotifyToWhatsappSchema,
+	): Promise<WhatsappResponseModel> {
 		try {
-			const processResult = await addWhatsappNotificationToQueue();
+			const processResult = await addWhatsappNotificationToQueue(requestBody);
 
 			this.setStatus(StatusCodes.OK);
 			return {

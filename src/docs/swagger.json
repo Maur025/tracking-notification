@@ -40,6 +40,22 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"INotifyToWhatsappSchema": {
+				"properties": {
+					"numberPhone": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"numberPhone",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"EmailResponseModel": {
 				"properties": {
 					"code": {
@@ -193,7 +209,17 @@
 					}
 				},
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/INotifyToWhatsappSchema"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/emails/queue": {

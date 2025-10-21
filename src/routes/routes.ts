@@ -26,6 +26,15 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "INotifyToWhatsappSchema": {
+        "dataType": "refObject",
+        "properties": {
+            "numberPhone": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "EmailResponseModel": {
         "dataType": "refObject",
         "properties": {
@@ -69,6 +78,7 @@ export function RegisterRoutes(app: Router) {
 
     
         const argsWhatsappController_addWhatsappToQueue: Record<string, TsoaRoute.ParameterSchema> = {
+                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"INotifyToWhatsappSchema"},
         };
         app.post('/api/notifications/whatsapps/queue',
             ...(fetchMiddlewares<RequestHandler>(WhatsappController)),
