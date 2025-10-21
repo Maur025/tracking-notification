@@ -5,10 +5,10 @@
   "spec": {
     "outputDirectory": "src/docs",
     "specVersion": 3,
-    "basePath": "/api"
+    "basePath": "/api/notifications"
   },
   "routes": {
-    "basePath": "/api",
+    "basePath": "/api/notifications",
     "routesDir": "src/routes",
     "esm": true
   }

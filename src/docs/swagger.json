@@ -6,7 +6,56 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"EmailResponseModel": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"id"
+						],
+						"type": "object"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"WhatsappResponseModel": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"id"
+						],
+						"type": "object"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -26,22 +75,39 @@
 				"operationId": "AddQueueEmail",
 				"responses": {
 					"200": {
-						"description": "Email added to queue",
+						"description": "Success",
 						"content": {
 							"application/json": {
 								"schema": {
-									"properties": {
-										"message": {
-											"type": "string"
-										}
-									},
-									"required": [
-										"message"
-									],
-									"type": "object"
+									"$ref": "#/components/schemas/EmailResponseModel"
 								}
 							}
 						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/whatsapps/queue": {
+			"post": {
+				"operationId": "AddWhatsappToQueue",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/WhatsappResponseModel"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
 					}
 				},
 				"security": [],
@@ -51,7 +117,7 @@
 	},
 	"servers": [
 		{
-			"url": "/api"
+			"url": "/api/notifications"
 		}
 	]
 }

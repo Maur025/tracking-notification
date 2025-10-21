@@ -1,4 +1,5 @@
 import { loggerDebug, loggerError } from '@maur025/core-logger';
+import { workerTopics } from '@src/worker-topic.js';
 import { Worker } from 'bullmq';
 import { Redis } from 'ioredis';
 
@@ -6,10 +7,10 @@ let emailWorker: Worker;
 
 export const runEmailWorker = (connection: Redis): Worker => {
 	emailWorker = new Worker(
-		'emailQueue',
+		workerTopics.EMAIL,
 		async job => {
 			loggerDebug(`Processing email job`);
-			console.log(job);
+			console.log(job.data);
 		},
 		{ connection },
 	);

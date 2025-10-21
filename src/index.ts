@@ -14,12 +14,3 @@ RegisterRoutes(getApplication());
 startServer();
 
 initializeWorkers();
-
-// const myQueue = new Queue('foo');
-
-// const addJobs = async () => {
-// 	await myQueue.add('myJobName', { foo: 'bar' });
-// 	await myQueue.add('myJobName', { qux: 'baz' });
-// };
-
-// await addJobs();
