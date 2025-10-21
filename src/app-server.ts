@@ -1,12 +1,17 @@
 import compression from 'compression';
-import { ServerBuilder } from './server/server-builder';
+import { ServerBuilder } from './server/server-builder.js';
 import express from 'express';
 import cors from 'cors';
-import { env } from '@config/env';
+import { env } from '@config/env.js';
 import { apiReference } from '@scalar/express-api-reference';
-import DocReferenceFile from './docs/swagger.json';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const { PORT, HOST } = env;
+
+const DocReferenceFile = JSON.parse(
+	readFileSync(join(process.cwd(), 'src/docs/swagger.json'), 'utf-8'),
+);
 
 const appServer = ServerBuilder.builder()
 	.withMiddleware(compression())
@@ -25,12 +30,9 @@ const appServer = ServerBuilder.builder()
 			optionsSuccessStatus: 200,
 		}),
 	)
-	.withRoute([
-		'/reference',
-		apiReference({ spec: { content: DocReferenceFile } }),
-	])
+	.withRoute(['/reference', apiReference({ content: DocReferenceFile })])
 	.withHost(HOST)
 	.withPort(PORT)
 	.build();
 
-export default appServer;
+export { appServer };

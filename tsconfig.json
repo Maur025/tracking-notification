@@ -1,15 +1,13 @@
 {
 	"compilerOptions": {
-		"incremental": true,
-		"target": "ES2022",
-		"lib": ["ES2022"],
-		"emitDecoratorMetadata": true,
-		"module": "ES2022",
-		"rootDir": ".",
+		"target": "es2022",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"baseUrl": ".",
 		"paths": {
 			"@config/*": ["src/config/*"],
-			"@doc/*":["src/docs/*"],
-			"@module/*":["src/module/*"],
+			"@doc/*": ["src/docs/*"],
+			"@module/*": ["src/module/*"],
 			"@server/*": ["src/server/*"],
 			"@util/*": ["src/util/*"],
 			"@worker/*": ["src/worker/*"],
@@ -17,37 +15,17 @@
 			"@unitTest/*": ["test/unit/*"],
 			"@src/*": ["src/*"]
 		},
-		"sourceMap": false,
-		"outDir": "dist",
-		
 		"strict": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictBindCallApply": true,
-		"strictPropertyInitialization": true,
-		"noImplicitThis": true,
-		"alwaysStrict": true,
-		
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		
-		"moduleResolution": "node",
-		"baseUrl": ".",
+		"noEmit": true,
 		"esModuleInterop": true,
-		
+		"allowSyntheticDefaultImports": true,
 		"experimentalDecorators": true,
-		"forceConsistentCasingInFileNames": true,
-
+		"emitDecoratorMetadata": true,
+		"useDefineForClassFields": false,
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
-		"declaration": true,
-		"declarationMap": true,
-		"removeComments": true,
-		"exactOptionalPropertyTypes": true
+		"outDir": "dist"
 	},
-	"include": ["src/**/*", "tests/**/*"],
+	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist"]
 }

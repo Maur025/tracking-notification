@@ -1,10 +1,9 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import { loggerDebug } from '@maur025/core-logger';
-// import { Queue } from 'bullmq';
-import appServer from './app-server';
-import { RegisterRoutes } from './routes/routes';
-import { initializeWorkers } from '@worker/initialize-workers';
+import { initializeWorkers } from '@worker/initialize-workers.js';
+import { appServer } from './app-server.js';
+import { RegisterRoutes } from './routes/routes.js';
 
 const { startServer, getApplication } = appServer;
 

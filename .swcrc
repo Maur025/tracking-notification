@@ -1,0 +1,30 @@
+{
+	"jsc": {
+		"target": "es2022",
+		"parser": {
+			"syntax": "typescript",
+			"decorators": true,
+			"dynamicImport": true
+		},
+		"transform": {
+			"decoratorMetadata": true
+		},
+		"baseUrl": ".",
+		"paths": {
+			"@config/*": ["src/config/*"],
+			"@doc/*": ["src/docs/*"],
+			"@module/*": ["src/module/*"],
+			"@server/*": ["src/server/*"],
+			"@util/*": ["src/util/*"],
+			"@worker/*": ["src/worker/*"],
+			"@integrationTest/*": ["test/integration/*"],
+			"@unitTest/*": ["test/unit/*"],
+			"@src/*": ["src/*"]
+		}
+	},
+	"module": {
+		"type": "es6",
+		"strict": true
+	},
+	"sourceMaps": true
+}

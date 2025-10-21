@@ -6,7 +6,7 @@ import express, {
 	NextFunction,
 } from 'express';
 import z, { enum as enum_ } from 'zod';
-import { ServerBuilderSchema } from './server-builder.schema';
+import { ServerBuilderSchema } from './server-builder.schema.js';
 import { Server } from 'http';
 import { loggerInfo } from '@maur025/core-logger';
 
@@ -26,8 +26,8 @@ export class ServerBuilder {
 		return new ServerBuilder(express());
 	}
 
-	public withConfiguration(config: () => void): this {
-		config();
+	public withConfiguration(config: (app: Application) => void): this {
+		config(this.app);
 		return this;
 	}
 
@@ -91,5 +91,7 @@ export class ServerBuilder {
 	}
 
 	serverRunningMessage = (): string =>
-		`[EXPRESS] server running on http(s)://${this.host ?? 'localhost'}:${this.port ? this.port : ''}`;
+		`[EXPRESS] server running on http(s)://${this.host ?? 'localhost'}:${
+			this.port ? this.port : ''
+		}`;
 }
