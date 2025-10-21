@@ -23,6 +23,12 @@ export default class WhatsappService {
 		return this.browser;
 	}
 
+	public getNewPageWhatsapp(): Promise<Page> {
+		const browserHeadless = this.getWhatsappBrowser();
+
+		return browserHeadless.newPage();
+	}
+
 	public async closeWhatsappBrowser(): Promise<void> {
 		if (this.browser) {
 			await this.browser.close();

@@ -27,7 +27,7 @@ export const runEmailWorker = (connection: Redis): Worker => {
 
 			loggerDebug(`Email job processed successfully`);
 		},
-		{ connection },
+		{ connection, concurrency: 15 },
 	);
 
 	emailWorker.on('completed', job => {

@@ -4,10 +4,10 @@ import { workerTopics } from '@src/worker-topic.js';
 import { Worker } from 'bullmq';
 import { Redis } from 'ioredis';
 
-let whatsappWorker: Worker;
+let whatsappWorkerBackup: Worker;
 
-export const runWhatsappWorker = (connection: Redis): Worker => {
-	whatsappWorker = new Worker(
+export const runWhatsappWorkerBackup = (connection: Redis): Worker => {
+	whatsappWorkerBackup = new Worker(
 		workerTopics.WHATSAPP,
 		async job => {
 			loggerDebug(`[WORKER-WHATSAPP-BACKUP] Processing whatsapp job ${job.id}`);
@@ -18,13 +18,13 @@ export const runWhatsappWorker = (connection: Redis): Worker => {
 		{ connection },
 	);
 
-	whatsappWorker.on('completed', job => {
+	whatsappWorkerBackup.on('completed', job => {
 		loggerDebug(`Whatsapp Job ${job.id} has completed`);
 	});
 
-	whatsappWorker.on('failed', (job, error) => {
+	whatsappWorkerBackup.on('failed', (job, error) => {
 		loggerError(`Whatsapp Job ${job?.id} has failed with ${error.message}`);
 	});
 
-	return whatsappWorker;
+	return whatsappWorkerBackup;
 };

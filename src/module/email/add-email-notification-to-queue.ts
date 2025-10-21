@@ -10,6 +10,7 @@ export const addEmailNotificationToQueue = async (
 	const response = await emailQueue.add(
 		workerJobNames.EMAIL_SEND_NOTIFICATION,
 		request,
+		{ attempts: 5, backoff: { type: 'exponential', delay: 8000 } },
 	);
 
 	loggerDebug(`Added Email notification to queue: ${response.id}`);
