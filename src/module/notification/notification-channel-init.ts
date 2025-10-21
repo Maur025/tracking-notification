@@ -10,7 +10,7 @@ export const notificationChannelInit = async (): Promise<void> => {
 
 	const emailChannelData: Channel | undefined = channelCache.getChannel('1');
 
-	if (emailChannelData) {
+	if (emailChannelData?.data?.params) {
 		const emailService = container.resolve(EmailService);
 		const { server, port, ssl, username, password } = getEmailChannelParams(
 			emailChannelData?.data?.params,
