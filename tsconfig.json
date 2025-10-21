@@ -5,6 +5,7 @@
 		"moduleResolution": "nodenext",
 		"baseUrl": ".",
 		"paths": {
+			"@common/*":["src/common/*"],
 			"@config/*": ["src/config/*"],
 			"@doc/*": ["src/docs/*"],
 			"@module/*": ["src/module/*"],
@@ -24,7 +25,21 @@
 		"useDefineForClassFields": false,
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		
+		"incremental": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist"]

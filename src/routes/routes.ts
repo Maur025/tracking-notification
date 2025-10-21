@@ -5,6 +5,8 @@ import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EmailController } from './../module/email/email.controller.js';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { WhatsappController } from './../module/whatsapp/whatsapp.controller.js';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -12,6 +14,26 @@ import type { Request as ExRequest, Response as ExResponse, RequestHandler, Rout
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "EmailResponseModel": {
+        "dataType": "refObject",
+        "properties": {
+            "code": {"dataType":"double"},
+            "message": {"dataType":"string"},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"string","required":true}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "WhatsappResponseModel": {
+        "dataType": "refObject",
+        "properties": {
+            "code": {"dataType":"double"},
+            "message": {"dataType":"string"},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"string","required":true}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const templateService = new ExpressTemplateService(models, {"noImplicitAdditionalProperties":"throw-on-extras","bodyCoercion":true});
 
@@ -31,7 +53,7 @@ export function RegisterRoutes(app: Router) {
     
         const argsEmailController_addQueueEmail: Record<string, TsoaRoute.ParameterSchema> = {
         };
-        app.post('/api/emails/queue',
+        app.post('/api/notifications/emails/queue',
             ...(fetchMiddlewares<RequestHandler>(EmailController)),
             ...(fetchMiddlewares<RequestHandler>(EmailController.prototype.addQueueEmail)),
 
@@ -47,6 +69,35 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'addQueueEmail',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsWhatsappController_addWhatsappToQueue: Record<string, TsoaRoute.ParameterSchema> = {
+        };
+        app.post('/api/notifications/whatsapps/queue',
+            ...(fetchMiddlewares<RequestHandler>(WhatsappController)),
+            ...(fetchMiddlewares<RequestHandler>(WhatsappController.prototype.addWhatsappToQueue)),
+
+            async function WhatsappController_addWhatsappToQueue(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsWhatsappController_addWhatsappToQueue, request, response });
+
+                const controller = new WhatsappController();
+
+              await templateService.apiHandler({
+                methodName: 'addWhatsappToQueue',
                 controller,
                 response,
                 next,
