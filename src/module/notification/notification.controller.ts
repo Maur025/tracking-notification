@@ -6,7 +6,10 @@ import { injectable } from 'tsyringe';
 
 @injectable()
 export class NotificationController {
-	public async getEmailQueueStatus(req: Request, res: Response): Promise<void> {
+	public async getEmailQueueStatus(
+		_req: Request,
+		res: Response,
+	): Promise<void> {
 		try {
 			const metrics = await emailQueue.exportPrometheusMetrics();
 			res.status(200).set('Content-Type', 'text/plain').send(metrics);
@@ -20,7 +23,7 @@ export class NotificationController {
 	}
 
 	public async getWhatsappQueueStatus(
-		req: Request,
+		_req: Request,
 		res: Response,
 	): Promise<void> {
 		try {
