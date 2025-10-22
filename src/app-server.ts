@@ -6,6 +6,7 @@ import { env } from '@config/env.js';
 import { apiReference } from '@scalar/express-api-reference';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { outTsoaRoutes } from './routes/out.tsoa.routes.js';
 
 const { PORT, HOST } = env;
 
@@ -31,6 +32,7 @@ const appServer = ServerBuilder.builder()
 		}),
 	)
 	.withRoute(['/reference', apiReference({ content: DocReferenceFile })])
+	.withRoute(['/api/notifications', outTsoaRoutes])
 	.withHost(HOST)
 	.withPort(PORT)
 	.build();

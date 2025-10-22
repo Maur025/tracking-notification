@@ -8,7 +8,6 @@ import {
 } from 'tsoa/dist/index.js';
 import { StatusCodes } from 'http-status-codes';
 import { addEmailNotificationToQueue } from './add-email-notification-to-queue.js';
-
 interface EmailResponseModel {
 	code?: number;
 	message?: string;
