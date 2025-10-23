@@ -4,7 +4,7 @@ import z, { string } from 'zod';
 
 export const CProtocol = BaseData.extend({
 	name: CProtocolName,
-	script: string().optional(),
+	script: string().nullable().optional(),
 });
 
 export type CProtocol = z.infer<typeof CProtocol>;
