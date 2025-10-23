@@ -3,7 +3,7 @@ import z, { string } from 'zod';
 
 export const CProtocolResponse = BaseData.extend({
 	name: string().nonempty(),
-	script: string().optional(),
+	script: string().nullable().optional(),
 });
 
 export type CProtocolResponse = z.infer<typeof CProtocolResponse>;
