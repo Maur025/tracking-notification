@@ -25,7 +25,7 @@ export const sendNotificationToWhatsapp = async (
 
 	await buttonSend.click();
 
-	await pageToSend.waitForTimeout(1000);
+	await pageToSend.waitForTimeout(1500);
 	await pageToSend.close();
 
 	loggerDebug(`[WHATSAPP] (func) notification sent to number: ${numberPhone}`);
