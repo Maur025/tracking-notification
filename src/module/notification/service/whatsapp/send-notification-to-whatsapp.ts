@@ -14,19 +14,23 @@ export const sendNotificationToWhatsapp = async (
 
 	const textoUrl = encodeURIComponent(message);
 
-	const pageToSend = await whatsappService.getNewPageWhatsapp();
+	const browserHeadless = await whatsappService.getWhatsappBrowser();
+
+	const pageToSend = await browserHeadless.newPage();
 	await pageToSend.goto(
 		`${WHATSAPP_URL}/send?phone=591${numberPhone}&text=${textoUrl}`,
 	);
 
 	const buttonSend = await pageToSend.waitForSelector('[aria-label="Send"]', {
-		state: 'attached',
+		state: 'visible',
 	});
 
 	await buttonSend.click();
 
-	await pageToSend.waitForTimeout(1500);
+	await pageToSend.waitForTimeout(1000);
 	await pageToSend.close();
 
-	loggerDebug(`[WHATSAPP] (func) notification sent to number: ${numberPhone}`);
+	loggerDebug(
+		`[WHATSAPP] (sendNotificationToWhatsapp) notification sent to number: ${numberPhone}`,
+	);
 };
