@@ -1,32 +1,40 @@
+import { env } from '@config/env.js';
 import { loggerDebug, loggerError, loggerInfo } from '@maur025/core-logger';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { BrowserContext, chromium, Page } from 'playwright';
 import { singleton } from 'tsyringe';
 
+const {
+	WHATSAPP_BROWSER_LIFETIME_MINUTES,
+	WHATSAPP_BROWSER_VERIFY_LIFE_MINUTES,
+} = env;
 @singleton()
 export default class WhatsappService {
 	private readonly PROFILE_DATA_PATH: string = `${path.join(process.cwd(), 'tmp/playwright-profile')}`;
 	private readonly BROWSER_PATH: string = '/usr/bin/google-chrome-stable';
+	private readonly BROWSER_LIFETIME_MS: number =
+		WHATSAPP_BROWSER_LIFETIME_MINUTES * 60 * 1000;
 
 	private browser: BrowserContext | null = null;
+	private browserMonitorInterval: NodeJS.Timeout | null = null;
+	private lastBrowserActivity: number = 0;
 
 	constructor() {}
 
-	public getWhatsappBrowser(): BrowserContext {
+	public async getWhatsappBrowser(): Promise<BrowserContext> {
+		this.lastBrowserActivity = Date.now();
+
 		if (!this.browser) {
-			throw new Error(
+			loggerInfo(
 				`[WHATSAPP] (getWhatsappBrowser) whatsapp browser not initialized`,
 			);
+
+			await this.initialize();
+			return this.browser!;
 		}
 
 		return this.browser;
-	}
-
-	public getNewPageWhatsapp(): Promise<Page> {
-		const browserHeadless = this.getWhatsappBrowser();
-
-		return browserHeadless.newPage();
 	}
 
 	public async closeWhatsappBrowser(): Promise<void> {
@@ -53,6 +61,51 @@ export default class WhatsappService {
 		this.browser = browserVerify;
 		loggerInfo(
 			`[WHATSAPP] (launchBrowserToSendMessage) whatsapp service started`,
+		);
+
+		this.setIntervalActivityWatcher();
+	}
+
+	private closeBrowserDueToInactivity(): void {
+		if (!this.browser) {
+			loggerDebug(
+				`[WHATSAPP] (closeBrowserDueToInactivity) browser not initialized`,
+			);
+			return;
+		}
+		const currentTime: number = Date.now();
+		const differenceSinceLastActivity: number =
+			currentTime - this.lastBrowserActivity;
+
+		if (differenceSinceLastActivity >= this.BROWSER_LIFETIME_MS) {
+			loggerInfo(
+				`[WHATSAPP] (closeBrowserDueToInactivity) safely closing browser due to inactivity`,
+			);
+
+			this.browser?.close();
+
+			if (this.browserMonitorInterval) {
+				clearInterval(this.browserMonitorInterval);
+			}
+
+			this.browserMonitorInterval = null;
+			this.browser = null;
+		}
+	}
+
+	private setIntervalActivityWatcher(): void {
+		if (this.browserMonitorInterval) {
+			loggerDebug(
+				`[WHATSAPP] (setIntervalActivityWatcher) browser interval monitor already set`,
+			);
+			return;
+		}
+
+		this.browserMonitorInterval = setInterval(
+			() => {
+				this.closeBrowserDueToInactivity();
+			},
+			WHATSAPP_BROWSER_VERIFY_LIFE_MINUTES * 60 * 1000,
 		);
 	}
 
@@ -183,7 +236,7 @@ export default class WhatsappService {
 	}
 
 	private async launchBrowserToSendMessage(): Promise<void> {
-		this.browser = await this.launchBrowser(true);
+		this.browser = await this.launchBrowser(false);
 		loggerInfo(
 			`[WHATSAPP] (launchBrowserToSendMessage) whatsapp service started`,
 		);
