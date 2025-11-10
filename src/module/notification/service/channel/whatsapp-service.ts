@@ -23,8 +23,6 @@ export default class WhatsappService {
 	constructor() {}
 
 	public async getWhatsappBrowser(): Promise<BrowserContext> {
-		this.lastBrowserActivity = Date.now();
-
 		if (!this.browser) {
 			loggerInfo(
 				`[WHATSAPP] (getWhatsappBrowser) whatsapp browser not initialized`,
@@ -34,6 +32,7 @@ export default class WhatsappService {
 			return this.browser!;
 		}
 
+		this.lastBrowserActivity = Date.now();
 		return this.browser;
 	}
 
@@ -63,10 +62,14 @@ export default class WhatsappService {
 			`[WHATSAPP] (launchBrowserToSendMessage) whatsapp service started`,
 		);
 
+		this.lastBrowserActivity = Date.now();
 		this.setIntervalActivityWatcher();
 	}
 
 	private closeBrowserDueToInactivity(): void {
+		loggerDebug(
+			`[WHATSAPP] (closeBrowserDueToInactivity) checking browser activity`,
+		);
 		if (!this.browser) {
 			loggerDebug(
 				`[WHATSAPP] (closeBrowserDueToInactivity) browser not initialized`,
