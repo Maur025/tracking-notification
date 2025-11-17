@@ -8,6 +8,9 @@ export const EnvironmentSchema = object({
 	HOST: string().optional(),
 	WHATSAPP_BROWSER_LIFETIME_MINUTES: number().nonnegative(),
 	WHATSAPP_BROWSER_VERIFY_LIFE_MINUTES: number().nonnegative(),
+	ADB_HOST: string().nonempty(),
+	ADB_PORT: number().nonnegative(),
+	ADB_DEVICE_SERIAL: string(),
 });
 
 export type EnvironmentSchema = z.infer<typeof EnvironmentSchema>;
