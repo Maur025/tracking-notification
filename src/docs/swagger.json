@@ -56,62 +56,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"EmailResponseModel": {
-				"properties": {
-					"code": {
-						"type": "number",
-						"format": "double"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"properties": {
-							"timestamp": {
-								"type": "number",
-								"format": "double"
-							},
-							"queueName": {
-								"type": "string"
-							},
-							"id": {
-								"type": "string"
-							}
-						},
-						"required": [
-							"timestamp",
-							"queueName",
-							"id"
-						],
-						"type": "object"
-					}
-				},
-				"type": "object",
-				"additionalProperties": false
-			},
-			"INotifyToEmailSchema": {
-				"properties": {
-					"senderList": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"subject": {
-						"type": "string"
-					},
-					"htmlMessage": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"senderList",
-					"subject",
-					"htmlMessage"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"StatusCodes": {
 				"enum": [
 					100,
@@ -174,6 +118,62 @@
 					511
 				],
 				"type": "number"
+			},
+			"EmailResponseModel": {
+				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"timestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"queueName": {
+								"type": "string"
+							},
+							"id": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"timestamp",
+							"queueName",
+							"id"
+						],
+						"type": "object"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"INotifyToEmailSchema": {
+				"properties": {
+					"senderList": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"subject": {
+						"type": "string"
+					},
+					"htmlMessage": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"senderList",
+					"subject",
+					"htmlMessage"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -220,6 +220,40 @@
 						}
 					}
 				}
+			}
+		},
+		"/sms/queue": {
+			"post": {
+				"operationId": "AddSmsToQueue",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"code": {
+											"$ref": "#/components/schemas/StatusCodes"
+										}
+									},
+									"required": [
+										"message",
+										"code"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/emails/queue": {
@@ -346,7 +380,7 @@
 																"enum": [
 																	"mail_smtp",
 																	"sms_service",
-																	"wp_service"
+																	"whatsapp_service"
 																]
 															}
 														},

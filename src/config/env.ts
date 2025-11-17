@@ -8,6 +8,9 @@ const {
 	HOST,
 	WHATSAPP_BROWSER_LIFETIME_MINUTES = '15',
 	WHATSAPP_BROWSER_VERIFY_LIFE_MINUTES = '5',
+	ADB_HOST = 'localhost',
+	ADB_PORT = '5037',
+	ADB_DEVICE_SERIAL = 'emulator-5554,emulator-5556',
 } = process.env;
 
 export const env: EnvironmentSchema = {
@@ -20,4 +23,7 @@ export const env: EnvironmentSchema = {
 	WHATSAPP_BROWSER_VERIFY_LIFE_MINUTES: Number(
 		WHATSAPP_BROWSER_VERIFY_LIFE_MINUTES,
 	),
+	ADB_HOST,
+	ADB_PORT: Number(ADB_PORT),
+	ADB_DEVICE_SERIAL,
 };
